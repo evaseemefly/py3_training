@@ -22,7 +22,10 @@ def db_handler():
     :param conn_parms: the db connection params set in settings
     :return:a
     '''
+    # 获取DATABASE字典
     conn_params = settings.DATABASE
+    # 判断数据库字典中的引擎标记
+    # 只实现了file存储的方式
     if conn_params['engine'] == 'file_storage':
         return file_db_handle(conn_params)
     elif conn_params['engine'] == 'mysql':

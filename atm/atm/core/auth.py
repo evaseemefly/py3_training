@@ -11,7 +11,6 @@ import time
 
 def login_required(func):
     "验证用户是否登录"
-
     def wrapper(*args,**kwargs):
         #print('--wrapper--->',args,kwargs)
         if args[0].get('is_authenticated'):
@@ -54,7 +53,11 @@ def acc_auth2(account,password):
     :return: if passed the authentication , retun the account object, otherwise ,return None
 
     '''
+
+    # 读取json获取指定用户的账户信息
+    # 一个账户一个账户名.json文件
     db_api = db_handler.db_handler()
+
     data = db_api("select * from accounts where account=%s" % account)
 
 
@@ -74,7 +77,9 @@ def acc_login(user_data,log_obj):
     :return:
     '''
     retry_count = 0
+    # 根据穿入的用户数据（字典）判断用户是否通过验证
     while user_data['is_authenticated'] is not True and retry_count < 3 :
+        # 若未通过验证则需要输入账号与密码
         account = input("\033[32;1maccount:\033[0m").strip()
         password = input("\033[32;1mpassword:\033[0m").strip()
         auth = acc_auth2(account, password)

@@ -15,12 +15,15 @@ from core.auth import login_required
 import time
 
 #transaction logger
+# 转账日志
 trans_logger = logger.logger('transaction')
 #access logger
+# 存取日志
 access_logger = logger.logger('access')
 
 
 #temp account data ,only saves the data in memory
+# 用来存储用户登录的一些信息的字典（存储在内存中）
 user_data = {
     'account_id':None,
     'is_authenticated':False,
